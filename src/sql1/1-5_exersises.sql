@@ -1,0 +1,1 @@
+\c sql_training;
