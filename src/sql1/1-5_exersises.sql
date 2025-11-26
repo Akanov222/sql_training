@@ -1,28 +1,32 @@
--- 1. Вывести всех сотрудников с зарплатой больше 50000
-
+-- 1. Вывести всех сотрудников с зарплатой больше 60000
 SELECT *
 FROM employees
-WHERE salary > 50000;
+WHERE salary > 60000;
 
 -- 2. Найти топ-5 самых высокооплачиваемых сотрудников
-
 SELECT *
 FROM employees
 ORDER BY salary DESC
 LIMIT 5;
 
 -- 3. Посчитать среднюю зарплату по отделам
-
 SELECT AVG(e.salary) AS average_hr_salary
 FROM employees AS e
 JOIN departments AS d ON d.department_id = e.department_id
 WHERE d.department_name = 'HR';
 
-SELECT d.department_name, ROUND(AVG(e.salary)) AS average_salary
+SELECT d.department_id, d.department_name, ROUND(AVG(e.salary)) AS avaradge_salary
 FROM employees AS e
-JOIN departments AS d ON d.department_id = e.department_id
-GROUP BY d.department_name
-ORDER BY average_salary ASC;
+         JOIN departments AS d ON e.department_id = d.department_id
+GROUP BY d.department_id
+ORDER BY d.department_id ASC;
 
 -- 4. Найти сотрудников, чья фамилия начинается на 'Ив'
--- 5. Вывести сотрудников с датой приема на работу за последний год
+SELECT *
+FROM employees
+WHERE last_name LIKE 'Ив%';
+
+-- 5. Вывести сотрудников с датой приема на работу за последние 3 года
+SELECT *
+FROM employees
+WHERE hire_date >= CURRENT_DATE - INTERVAL '3 year';
